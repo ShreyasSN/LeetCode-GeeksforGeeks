@@ -20,7 +20,7 @@ class Solution{
         for(int i=0; i<n; i++)
         {
             sum += A[i];
-            if(prefix_sum.count(sum) > 0) maxlen = max(maxlen, i-prefix_sum[sum]);
+            if(prefix_sum.count(sum)) maxlen = max(maxlen, i-prefix_sum[sum]);
             else prefix_sum[sum] = i;
         }
         return maxlen;
