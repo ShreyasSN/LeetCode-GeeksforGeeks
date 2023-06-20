@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> getAverages(vector<int>& nums, int k) {
-    
         if (k == 0) {
             return nums;
         }
@@ -9,23 +8,22 @@ public:
         int n = nums.size();
         vector<int> averages(n, -1);
 
-       
         if (2 * k + 1 > n) {
             return averages;
         }
 
-        
-        long long windowSum = 0;
-        for (int i = 0; i < (2 * k + 1); i++) {
-            windowSum += nums[i];
+      
+        vector<long long> prefix(n + 1);
+        for (int i = 0; i < n; ++i) {
+            prefix[i + 1] = prefix[i] + nums[i];
         }
-        averages[k] = windowSum / (2 * k + 1);
-
         
         
-        for (int i = (2 * k + 1); i < n; i++) {
-            windowSum = windowSum - nums[i - (2 * k + 1)] + nums[i];
-            averages[i - k] = windowSum / (2 * k + 1);
+        for (int i = k; i < (n - k); ++i) {
+            int leftBound = i - k, rightBound = i + k;
+            long long subArraySum = prefix[rightBound + 1] - prefix[leftBound];
+            int average = subArraySum / (2 * k + 1);
+            averages[i] = average;
         }
 
         return averages;
