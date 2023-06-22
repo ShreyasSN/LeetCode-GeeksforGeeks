@@ -5,9 +5,8 @@ public:
         int hold = -prices[0], free = 0;
         for(int i=1; i<n; i++)
         {
-            int temp = hold;
             hold = max(hold, free - prices[i]);
-            free = max(free, prices[i] + temp - fee);
+            free = max(free, prices[i] + hold - fee);
             
         }
         return free;
