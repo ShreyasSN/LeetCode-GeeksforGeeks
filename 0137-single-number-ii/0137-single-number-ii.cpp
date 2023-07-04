@@ -1,16 +1,16 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        unordered_map<int, int> mp;
-        for(auto x: nums)
-        {
-            mp[x]++;
+         int x1 = 0, x2 = 0, mask = 0;
+         
+        for (int i : nums) {
+            x2 ^= x1 & i;
+            x1 ^= i;
+            mask = ~(x1 & x2);
+            x2 &= mask;
+            x1 &= mask;
         }
-        for(int i=0; i<nums.size(); i++){
-            if(mp[nums[i]] < 2){
-                return nums[i];
-            }
-        }
-        return -1;
+
+        return x1; 
     }
 };
