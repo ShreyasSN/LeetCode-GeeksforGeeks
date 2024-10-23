@@ -3,11 +3,120 @@
 My ```LeetCode profile``` can be accessed at [shreyas_s_n](https://leetcode.com/shreyas_s_n/)  
 It contains a comprehensive collection of my solutions to various coding problems in C++ programming language.
 
-# Content
+# Competitive Programming Topic Checklist
 
-This repository is a showcase of my proficiency in solving coding problems from LeetCode and other popular coding platforms. It contains a comprehensive collection of my solutions to various coding questions in C++ programming language. By exploring this repository, users can gain insight into my coding skills and expertise in C++ programming language. The repository also showcases my ability to analyze complex problems and implement effective solutions, providing a valuable resource for other programmers looking to improve their coding proficiency. 
+### Easy
+- [ ] Sorting
+- [ ] Binary Search
+- [ ] Greedy
+- [ ] Stack
+- [ ] Prefix Sums
+- [ ] Complete Search
+- [ ] Simulation
+- [ ] Combinatorics
+- [ ] Recursion
+- [ ] DFS (Depth First Search)
+- [ ] BFS (Breadth First Search)
+- [ ] Knapsack
+- [ ] Bitmasks
+- [ ] 2P (Two Pointers)
+- [ ] Tree
+- [ ] Connected Components
+- [ ] Math
+- [ ] Strings
+- [ ] Bitwise
+- [ ] Geometry
+- [ ] Prime Factorization
+- [ ] Linked List
+- [ ] Set
+- [ ] Ad Hoc Problems
+- [ ] Basic Casework
+- [ ] Permutations and Combinations
+- [ ] Pigeonhole Principle
+- [ ] Modular Arithmetic Basics
+- [ ] GCD (Greatest Common Divisor) and LCM (Least Common Multiple)
 
-Furthermore, this repository allows for collaboration and exchange of ideas among developers. Users can contribute their own solutions or suggest improvements to existing solutions. This fosters a community of learning and growth, where programmers can collectively improve their skills and knowledge.
+### Intermediate
+- [ ] DSU (Disjoint Set Union)
+- [ ] Sqrt (Square Root Decomposition)
+- [ ] Sliding Window
+- [ ] SP (Shortest Path)
+- [ ] Euler Tour
+- [ ] LCA (Lowest Common Ancestor)
+- [ ] Range DP
+- [ ] Hashing
+- [ ] PURS (Point Update Range Sum)
+- [ ] Binary Jumping
+- [ ] Treap
+- [ ] Bipartite
+- [ ] 2D Prefix Sums
+- [ ] 1DRQ (1D Range Queries)
+- [ ] Functional Graph
+- [ ] Merging
+- [ ] Trie
+- [ ] BCC (Biconnected Components)
+- [ ] SegTree (Segment Tree)
+- [ ] 2DRQ (2D Range Queries)
+- [ ] Modular Arithmetic
+- [ ] TopoSort (Topological Sort)
+- [ ] Meet in the Middle
+- [ ] Euler's Formula
+- [ ] Persistent Segtree
+- [ ] Divisibility
+- [ ] Suffix Array
+- [ ] FFT (Fast Fourier Transform)
+- [ ] Game Theory
+- [ ] Max Flow
+- [ ] LIS (Longest Increasing Subsequence)
+- [ ] Inversions
+- [ ] Coordinate Compression
+- [ ] Divisors
+- [ ] Difference Array
+- [ ] Binary Exponentiation
+- [ ] Fast I/O Techniques
+- [ ] Greedy Algorithms with Sorting
+- [ ] Game Trees
+- [ ] Priority Queue (Heap)
+- [ ] Prefix Trees (Tries)
+- [ ] XOR-based Algorithms
 
-# Disclaimer
-The solutions provided in this repository are intended solely for educational purposes. They may not be the most optimal or efficient solutions to the problems presented on LeetCode and other coding platforms
+### Advanced
+- [ ] MST (Minimum Spanning Tree)
+- [ ] LCT (Link-Cut Tree)
+- [ ] Lazy SegTree (Lazy Propagation Segment Tree)
+- [ ] HLD (Heavy-Light Decomposition)
+- [ ] SCC (Strongly Connected Components)
+- [ ] Suffix Structures
+- [ ] SegTreeBeats
+- [ ] Bitset
+- [ ] Slope Trick
+- [ ] Exponentiation
+- [ ] Centroid Decomposition
+- [ ] Small to Large Merging
+- [ ] Binary Lifting
+- [ ] 2SAT
+- [ ] Mo's Algorithm
+- [ ] SOS DP (Sum Over Subsets Dynamic Programming)
+- [ ] Catalan Numbers
+- [ ] Wavelet Tree
+- [ ] Matrix Exponentiation
+- [ ] Max Subarray Sum
+- [ ] Dynacon (Dynamic Connectivity)
+- [ ] Convex Hull
+- [ ] Radial Sweep
+- [ ] Nimbers (Game Theory)
+- [ ] Pruning Techniques
+- [ ] Suffix Tree
+- [ ] Palindromic Tree
+- [ ] Segment Tree with Lazy Propagation
+- [ ] Hamiltonian Path
+- [ ] Min Cost Flow
+- [ ] Sparse SegTree (Sparse Segment Tree)
+- [ ] Treap with Persistent Data
+- [ ] Determinant
+- [ ] Generating Functions
+- [ ] XOR Convolution
+- [ ] BBST (Balanced Binary Search Tree)
+- [ ] Cactus Graphs
+- [ ] Meet in the Middle (Advanced)
+- [ ] Binary Search with Two Pointers
