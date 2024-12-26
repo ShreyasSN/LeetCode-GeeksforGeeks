@@ -9,8 +9,12 @@ class Solution {
     }
 public:
     int countHousePlacements(int n) {
-        vector<long long int> dp(n+1, -1);
-        f(dp, n);
+        vector<long long int> dp(n+1);
+        dp[1] = 2;
+        if(n > 1) dp[2] = 3;
+        for(int i=3; i<=n; i++){
+            dp[i] = (dp[i-1]%mod + dp[i -2]%mod ) %mod;
+        }
         return ((dp[n]%mod * dp[n]%mod) % mod);
     }
 };
