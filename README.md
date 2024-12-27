@@ -6,7 +6,7 @@ It contains a comprehensive collection of my solutions to various coding problem
 # Competitive Programming Topic Checklist
 
 ### Easy
-- [ ] Sorting
+- [*] Sorting
 - [ ] Binary Search
 - [ ] Greedy
 - [ ] Stack
