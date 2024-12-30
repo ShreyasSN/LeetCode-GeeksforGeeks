@@ -4,7 +4,7 @@ public:
         double l = 0, r = 1;
         int p = 0, q = 1;
         int n = arr.size();
-        while(1){
+        while(l < r){
             double m = l + (r - l )/ 2;
             int cnt = 0, p = 0;
             for(int i=0, j=n-1; i<n; i++){
