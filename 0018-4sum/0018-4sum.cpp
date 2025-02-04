@@ -1,53 +1,43 @@
 class Solution {
 public:
+    vector<vector<int>> res;
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        sort(begin(nums), end(nums));
-        return kSum(nums, target, 0, 4);
+        sort(nums.begin(), nums.end());
+        ksum(nums, target, 4);
+        return res;
     }
-	
-    vector<vector<int>> kSum(vector<int>& nums, long long target, int start, int k) {
-        vector<vector<int>> res;
-        
-        if (start == nums.size()) {
-            return res;
-        }
-        
-        
-        long long average_value = target / k;
-      
-        if  (nums[start] > average_value || average_value > nums.back()) {
-            return res;
-        }
-            
+
+    void ksum(const vector<int>& a, int t, int k) {
+        vector<int> temp;
+        dfs(a, 0, (int)a.size() - 1, t, k, temp);
+    }
+
+    void dfs(const vector<int>& a, int l, int r, int t, int k, vector<int>& p) {
         if (k == 2) {
-            return twoSum(nums, target, start);
-        }
-    
-        for (int i = start; i < nums.size(); ++i) {
-            if (i == start || nums[i - 1] != nums[i]) {
-                for (vector<int>& subset : kSum(nums, static_cast<long>(target) - nums[i], i + 1, k - 1)) {
-                    res.push_back({nums[i]});
-                    res.back().insert(end(res.back()), begin(subset), end(subset));
-                }
+            while (l < r) {
+                if (a[l] + a[r] == t) {
+                    p.push_back(a[l]);
+                    p.push_back(a[r]);
+                    res.push_back(p);
+                    p.pop_back();
+                    p.pop_back();
+                    while (l + 1 < r && a[l] == a[l + 1])
+                        l++;
+                    l++, r--;
+                } else if (a[l] + a[r] > t)
+                    r--;
+                else
+                    l++;
             }
         }
-                                            
-        return res;
+        while (l < r) {
+            p.push_back(a[l]);
+            dfs(a, l + 1, r, t - a[l], k - 1, p);
+            p.pop_back();
+            while (l + 1 < r && a[l] == a[l + 1])
+                l++;
+            l++;
+        }
+        return;
     }
-	
-    vector<vector<int>> twoSum(vector<int>& nums, long long target, int start) {
-        vector<vector<int>> res;
-        unordered_set<long long> s;
-    
-        for (int i = start; i < nums.size(); ++i) {
-            if (res.empty() || res.back()[1] != nums[i]) {
-                if (s.count(target - nums[i])) {
-                    res.push_back({int(target - nums[i]), nums[i]});
-                }
-            }
-            s.insert(nums[i]);
-        }
-                                             
-        return res;
-    }  
 };
