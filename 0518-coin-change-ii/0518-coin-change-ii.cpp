@@ -1,17 +1,14 @@
 class Solution {
-    long long mod = 1e18 + 7;
-    int memo(vector<int>& coins, int target, int rem, int i, vector<vector<int>>& dp){
-        if(i >= coins.size()) return 0;
-        if(rem == target) return 1;
-        if(rem > target) return 0;
-        int &ans = dp[i][rem];
-        if (ans != -1) return ans;
-        return ans = (memo(coins, target, rem + coins[i], i, dp)%mod +  memo(coins, target, rem, i + 1, dp)%mod)%mod;
-    }
 public:
     int change(int amount, vector<int>& coins) {
-        int n = coins.size();
-        vector<vector<int>> dp(n+1, vector<int>(amount+1, -1));
-        return memo(coins, amount, 0, 0, dp);
+        vector<int> dp (amount + 1);
+        dp[0] = 1;
+        for(int i=0; i<coins.size(); i++){
+            for(int j=coins[i]; j<=amount; j++){
+                if (j - coins[i] >= 0)
+                    dp[j] += dp[j-coins[i]];
+            }
+        }
+        return dp[amount];
     }
 };
