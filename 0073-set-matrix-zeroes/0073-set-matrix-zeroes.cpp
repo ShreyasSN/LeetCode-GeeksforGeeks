@@ -1,25 +1,32 @@
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
-        int col0=1, rows=matrix.size(), cols = matrix[0].size();
-        for(int i=0; i<rows; i++){
-            if(matrix[i][0] == 0) col0 = 0;
-            for(int j=1; j<cols; j++){
-                if(matrix[i][j] == 0){
-                    matrix[0][j] = matrix[i][0] = 0;
+        int n = matrix.size(), m = matrix[0].size();
+
+        auto modify = [&](int x, int y) {
+            for (int i=0; i<m; i++) {
+                matrix[x][i] = 0;
+            }
+            for (int i=0; i<n; i++) {
+                matrix[i][y] = 0;
+            }
+        };
+
+        vector mark (n, vector<bool>(m, false));
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<m; j++) {
+                if(matrix[i][j] == 0) {
+                    mark[i][j] = true;
                 }
             }
         }
-        for(int i=rows-1; i>=0; i--)
-        {
-            for(int j=cols-1; j>=1; j--)
-            {
-                if(matrix[0][j] == 0 || matrix[i][0] == 0){
-                    matrix[i][j] = 0;
-                }
+
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<m; j++) {
+                if (mark[i][j]) {
+                    modify(i, j);
+                } 
             }
-            if(col0 == 0) matrix[i][0] = 0;
         }
-        
     }
 };
