@@ -1,14 +1,18 @@
 class Solution {
 public:
     int smallestDistancePair(vector<int>& nums, int k) {
-        vector<int> diff;
-        int n = nums.size();
-        for(int i=0; i<n; i++){
-            for(int j=i+1; j<n; j++){
-                diff.push_back(abs(nums[i] - nums[j]));
+        sort(nums.begin(), nums.end());
+        int n = nums.size(), l=0, r=nums.back()-nums.front();
+        while(l < r){
+            int cnt = 0;
+            int m = l + (r - l ) / 2;
+            for(int i=0, j=0; i<n; i++){
+                while(j < n && nums[j] <= nums[i] + m) j++;
+                cnt += j - i - 1;
             }
+            if(cnt < k) l = m + 1;
+            else r = m;
         }
-        sort(diff.begin(), diff.end());
-        return diff[k-1];
+        return l;
     }
 };
