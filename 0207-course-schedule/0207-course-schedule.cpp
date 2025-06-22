@@ -1,27 +1,36 @@
 class Solution {
 public:
-    bool canFinish(int n, vector<vector<int>>& p){
+    bool canFinish(int n, vector<vector<int>>& p) {
+        vector<int> d(n, 0);
         vector<vector<int>> g(n);
-        vector<int> degree(n,0);
-        queue<int> bfs;
-        for(auto e: p){
-            g[e[0]].push_back(e[1]);
-            degree[e[1]]++;
+        for (auto& e : p) {
+            g[e[1]].push_back(e[0]);
+            d[e[0]]++;
         }
-        vector<int> top_sort;
-        for(int i=0; i<n; i++){
-            if(degree[i] == 0) bfs.push(i);
-        }
-
-        while(!bfs.empty()){
-            int curr = bfs.front(); bfs.pop();
-            top_sort.push_back(curr);
-            for(int &i : g[curr]){
-                if(--degree[i] == 0) bfs.push(i);   
+        queue<int> q;
+        for (int i = 0; i < n; i++) {
+            if (d[i] == 0) {
+                q.push(i);
             }
         }
-        return top_sort.size() == n;
+        int res = 0;
+        while (!q.empty()) {
+            int len = q.size();
+            for (int i = 0; i < len; i++) {
+                int cur = q.front();
+                q.pop();
+                res++;
+                for (int& i : g[cur]) {
+                    if (--d[i] == 0) {
+                        q.push(i);
+                    }
+                }
+            }
+        }
+        return res == n;
     }
 };
-        
-    
+
+// n -> #courses
+// preR -> [a, b]
+// b -> a
