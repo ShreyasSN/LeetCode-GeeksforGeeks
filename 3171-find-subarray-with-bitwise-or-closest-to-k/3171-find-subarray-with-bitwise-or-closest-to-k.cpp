@@ -1,55 +1,52 @@
-const int N = 3e5 + 9;
+struct SegTree {
+    vector<int> t;
+    int n;
 
-int a[N];
-struct ST {
-    int t[2 * N]; 
-    ST() { memset(t, 0, sizeof t); }
+    SegTree(vector<int>& a) {
+        n = a.size();
+        t.resize(2 * n);
+        build(a);
+    }
 
     int merge(int l, int r) { return l | r; }
 
-    void build(int n, int b, int e) {
-        if (b > e) return;
-        if (b == e) {
-            t[n] = a[b];
-            return;
+    void build(vector<int>& a) { 
+        for (int i=0; i<n; i++) t[i+n] = a[i];
+        for (int i = n - 1; i > 0; --i) t[i] = merge(t[i<<1], t[i<<1|1]);
+    }
+
+    int query(int l, int r) { 
+        int res = 0;
+        for (l += n, r += n + 1; l < r; l >>= 1, r >>= 1)  {
+            if (l & 1) res = merge(res, t[l++]);
+            if (r & 1) res = merge(res, t[--r]);
         }
-        int mid = (b + e) >> 1, lft = n << 1, rgt = lft | 1;
-        build(lft, b, mid);
-        build(rgt, mid + 1, e);
-        t[n] = merge(t[lft], t[rgt]);
+        return res;
     }
-    
-    int query(int n, int b, int e, int i, int j) {
-        if (b > j || e < i) return 0;
-        if (b >= i && e <= j) return t[n];
-        int mid = (b + e) >> 1, lft = n << 1, rgt = lft | 1;
-        int L = query(lft, b, mid, i, j);
-        int R = query(rgt, mid + 1, e, i, j);
-        return merge(L, R);
-    }
-} T;
+};
 
 class Solution {
 public:
-    int minimumDifference(vector<int>& nums, int k) {
-        int n = nums.size();
-        for (int i = 0; i < n; i++) a[i] = nums[i];
+    int minimumDifference(vector<int>& a, int k) {
+        int n = a.size();
+        SegTree seg(a);  
 
-        T.build(1, 0, n - 1);
+        int res = INT_MAX;
+        for (int start = 0; start < n; ++start) {
+            int lo = start, hi = n - 1;
 
-        int ans = INT_MAX;
-        for (int l = 0; l < n; ++l) {
-            int lo = l, hi = n - 1, best = INT_MAX;
             while (lo <= hi) {
                 int mid = (lo + hi) >> 1;
-                int cur = T.query(1, 0, n - 1, l, mid);
-                ans = min(ans, abs(k - cur));
-                if (cur == k) return 0;
-                if (cur > k) hi = mid - 1;
+
+                int val = seg.query(start, mid);
+                res = min(res, abs(k - val));
+
+                if (val == k) return 0;
+                if (val > k) hi = mid - 1;
                 else lo = mid + 1;
             }
         }
 
-        return ans;
+        return res;
     }
 };
