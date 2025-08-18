@@ -1,70 +1,45 @@
-namespace SegmentTree {
-  template <class S, auto op, auto e>
-  struct init {
-public:
-  init() : init(0) {}
-  explicit init(int n, S init_val = e()) : init(std::vector<S>(n, init_val)) {}
-  explicit init(const std::vector<S> &v) : _n(int(v.size())) {
-    size = 1 << (32 - __builtin_clz(_n - 1));
-    log = __builtin_ctz(size);
-    d = std::vector<S>(2 * size, e());
-    for (int i = 0; i < _n; i++) { d[size + i] = v[i]; }
-    for (int i = size - 1; i >= 1; i--) { set(i); }
-  }
-
-  void update(int p, S x) {
-    d[p += size] = x;
-    for (int i = 1; i <= log; i++) set(p >> i);
-  }
-  S get(int p) const {
-    return d[p + size];
-  }
-  S get_all() const { return d[1]; }
-  S query(int l, int r) const {
-    S sml = e(), smr = e();
-    for (l += size, r += size + 1; l < r; l >>= 1, r >>= 1) {
-      if (l & 1) sml = op(sml, d[l++]);
-      if (r & 1) smr = op(d[--r], smr);
-    }
-    return op(sml, smr);
-  }
-private:
-    int _n, size, log;
-    std::vector<S> d;
-    void set(int k) { d[k] = op(d[k << 1], d[k << 1 | 1]); }
-  };
-}
-using ll = long long;
-struct info {
-  ll v;
-  info() : v(0) {}
-  info(ll _v) {
-    v = _v;
-  }
+int n;
+struct node {
+    int val;
+    node() : val(0) {}
+    node(int v) : val(v) {}
 };
-info e() { return info(0); }
-info op(const info &l, const info &r) {
-  return {l.v + r.v};
+node t[2 * (1<<17)]{}; 
+node merge(node l, node r) {
+    return node(l.val + r.val);
 }
-using segtree = SegmentTree::init<info, op, e>;
+void build() {
+    for (int i = n - 1; i > 0; --i)
+        t[i] = merge(t[i<<1], t[i<<1|1]);
+}
+void update(int p, int value) {
+    for (t[p += n] = node(value); p > 1; p >>= 1)
+        t[p>>1] = merge(t[p], t[p^1]);
+}
+node query(int l, int r) {
+    node resl(0), resr(0);
+    for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
+        if (l&1) resl = merge(resl, t[l++]);
+        if (r&1) resr = merge(t[--r], resr);
+    }
+    return merge(resl, resr);
+}
+
 class Solution {
 public:
     vector<int> countSmaller(vector<int>& nums) {
-        map<int, int> mp;
-        for (int x : nums) mp[x]; 
-        int idx = 0;
-        for (auto &kv : mp) kv.second = idx++; 
-        int n = mp.size(); 
-        if(n == 1) {
-            return vector<int>(nums.size(), 0);
-        }
-        segtree st(n);
-        vector<int> res(nums.size());
+        n = nums.size();
 
-        for (int i = nums.size() - 1; i >= 0; --i) {
+        map<int, int> mp;
+        int idx = 0;
+        for (int x : nums) mp[x];
+        for (auto &kv : mp) kv.second = idx++; 
+
+        vector<int> res(n);
+        for (int i = n - 1; i >= 0; --i) {
             int pos = mp[nums[i]];
-            res[i] = (pos > 0 ? st.query(0, pos - 1).v : 0);
-            st.update(pos, st.get(pos).v + 1);
+            res[i] = query(0, pos).val;
+            update(pos, 1);
         }
         return res;
     }
