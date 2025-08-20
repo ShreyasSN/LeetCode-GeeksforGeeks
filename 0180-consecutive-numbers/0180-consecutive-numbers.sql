@@ -1,4 +1,4 @@
-select num as ConsecutiveNums from (
+select distinct num as ConsecutiveNums from (
     select num, lag(num, 1) over (order by id asc) as lg, 
                 lead(num, 1) over (order by id asc) as ld
                 from logs
